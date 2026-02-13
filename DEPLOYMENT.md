@@ -26,7 +26,7 @@ docker compose up --build
 
 5. Access the platform:
    - Frontend: http://localhost:3000
-   - Backend: http://localhost:5000
+   - Backend: http://localhost:5001
 
 ### First Time Setup
 
@@ -69,7 +69,7 @@ nginx:
 
 The backend CORS configuration supports environment-based origins. By default, it allows:
 - `http://localhost:3000` (frontend)
-- `http://localhost:5000` (backend)
+- `http://localhost:5001` (backend)
 
 For production, set the `ALLOWED_ORIGINS` environment variable in `docker-compose.yml`:
 
@@ -142,7 +142,7 @@ backend:
 
 Backend health check:
 ```bash
-curl http://localhost:5000/health
+curl http://localhost:5001/health
 ```
 
 Database health:
@@ -206,7 +206,7 @@ JUDGE0_URL=http://judge0:2358
 JWT_SECRET=your-secret-key-change-in-production
 
 # CORS
-ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5000
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5001
 
 # Server
 PORT=5000
@@ -217,7 +217,7 @@ NODE_ENV=production
 
 ```bash
 # API URL
-REACT_APP_API_URL=http://localhost:5000
+REACT_APP_API_URL=http://localhost:5001
 ```
 
 ## Docker Compose Production

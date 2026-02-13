@@ -28,7 +28,7 @@
 ┌───────────────┐
 │   Backend     │  Express.js API Server
 │   Container   │  - JWT Authentication
-│  (Port 5000)  │  - REST API Endpoints
+│  (Port 5001)  │  - REST API Endpoints
 │               │  - Business Logic
 │               │  - Async Processing
 └─┬─────────┬───┘
