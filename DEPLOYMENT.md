@@ -79,7 +79,7 @@ backend:
     - ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
 ```
 
-Or use a wildcard for a single domain:
+For a single domain:
 ```yaml
 backend:
   environment:
