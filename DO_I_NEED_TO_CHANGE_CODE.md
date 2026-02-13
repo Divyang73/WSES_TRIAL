@@ -35,7 +35,7 @@ Docker will:
 ### 4. Access the Application
 Open your browser:
 - **http://localhost:3000** ← Main application
-- **http://localhost:5000** ← API backend
+- **http://localhost:5001** ← API backend
 
 ---
 
@@ -45,7 +45,7 @@ The CORS issue has been **completely resolved**. The configuration includes:
 
 ✅ **Backend CORS Settings** (`backend/src/app.js`):
 - Allows requests from `http://localhost:3000` (frontend)
-- Allows requests from `http://localhost:5000` (backend)
+- Allows requests from `http://localhost:5001` (backend)
 - Supports credentials (cookies, auth headers)
 - Handles OPTIONS preflight requests properly
 - Can be customized via environment variable

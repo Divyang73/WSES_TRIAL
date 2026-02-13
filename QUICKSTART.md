@@ -36,7 +36,7 @@ This will start:
 
 Once all services are running, open your browser:
 - **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:5000
+- **Backend API**: http://localhost:5001
 
 ## First Time Usage
 
@@ -152,7 +152,7 @@ npm start
 ## Troubleshooting
 
 ### Port Already in Use
-If ports 3000, 5000, or 3306 are already in use, stop those services or modify `docker-compose.yml`.
+If ports 3000, 5001, or 3306 are already in use, stop those services or modify `docker-compose.yml`.
 
 ### Judge0 Not Responding
 Wait a bit longer - Judge0 takes ~30 seconds to initialize on first start.
@@ -167,7 +167,7 @@ Look for `healthy` status on `wses-mysql`.
 ### Frontend Can't Connect to Backend
 Check that backend is running:
 ```bash
-curl http://localhost:5000/health
+curl http://localhost:5001/health
 ```
 Should return: `{"status":"ok","message":"WSES Backend is running"}`
 
@@ -188,7 +188,7 @@ Should return: `{"status":"ok","message":"WSES Backend is running"}`
          ▼
 ┌─────────────────┐      ┌──────────────┐
 │  Express API    │◄─────┤    MySQL     │
-│  (Port 5000)    │      │  (Port 3306) │
+│  (Port 5001)    │      │  (Port 3306) │
 └────────┬────────┘      └──────────────┘
          │
          ▼

@@ -1,6 +1,6 @@
 # API Documentation
 
-Base URL: `http://localhost:5000/api`
+Base URL: `http://localhost:5001/api`
 
 ## Authentication
 
@@ -386,7 +386,7 @@ Currently not implemented. Consider adding rate limiting for production deployme
 CORS is configured to allow cross-origin requests from the frontend.
 
 **Default Configuration:**
-- Allowed Origins: `http://localhost:3000`, `http://localhost:5000`
+- Allowed Origins: `http://localhost:3000`, `http://localhost:5001`
 - Credentials: Enabled
 - Methods: GET, POST, PUT, DELETE, OPTIONS
 - Headers: Content-Type, Authorization

@@ -50,7 +50,7 @@ docker compose up --build
 
 ### Step 4: Access the Application
 - **Frontend**: http://localhost:3000
-- **Backend**: http://localhost:5000
+- **Backend**: http://localhost:5001
 
 ---
 
@@ -89,14 +89,14 @@ frontend:
   ports:
     - "3001:3000"  # Change host port
   environment:
-    - REACT_APP_API_URL=http://localhost:5000
+    - REACT_APP_API_URL=http://localhost:5001
 ```
 
 **And add to backend environment:**
 ```yaml
 backend:
   environment:
-    - ALLOWED_ORIGINS=http://localhost:3001,http://localhost:5000
+    - ALLOWED_ORIGINS=http://localhost:3001,http://localhost:5001
 ```
 
 ### Scenario 3: Custom Database Password

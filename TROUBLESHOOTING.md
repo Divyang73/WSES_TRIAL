@@ -71,23 +71,41 @@ newgrp docker
 ```bash
 Error starting userland proxy: listen tcp 0.0.0.0:3000: bind: address already in use
 ```
+or
+```bash
+Error response from daemon: ports are not available: exposing port TCP 0.0.0.0:5000 -> 127.0.0.1:0: listen tcp 0.0.0.0:5000: bind: address already in use
+```
 
 **Solution:**
 
 **Option 1:** Stop conflicting service
 ```bash
-# Find process using port
+# Find process using the port (replace 3000 with 5000 for backend)
 sudo lsof -i :3000
+# Or for backend
+sudo lsof -i :5000
 # Kill process
 sudo kill -9 <PID>
 ```
 
 **Option 2:** Change port in docker-compose.yml
 ```yaml
+# For frontend
 frontend:
   ports:
     - "3001:3000"  # Change 3000 to 3001
+  environment:
+    - REACT_APP_API_URL=http://localhost:5001  # Update if backend port changed
+
+# For backend
+backend:
+  ports:
+    - "5001:5000"  # Change 5000 to 5001 (host:container)
 ```
+
+**Note:** Port 5000 is commonly used by macOS AirPlay Receiver. If using macOS:
+- System Preferences → Sharing → Uncheck "AirPlay Receiver"
+- Or use the port change option above (recommended)
 
 ### Container Keeps Restarting
 
