@@ -264,9 +264,33 @@ Access to XMLHttpRequest blocked by CORS policy
 ```
 
 **Solution:**
-1. Ensure backend has CORS enabled (already done in code)
-2. Verify API URL doesn't have trailing slash
-3. Check browser console for exact error
+1. Verify backend CORS configuration in `backend/src/app.js`
+   - Default allows `http://localhost:3000` and `http://localhost:5000`
+   - Supports credentials and common HTTP methods
+   - Handles OPTIONS preflight requests
+
+2. Check if backend is running:
+```bash
+curl http://localhost:5000/health
+```
+
+3. Test OPTIONS preflight:
+```bash
+curl -X OPTIONS http://localhost:5000/api/auth/signup \
+  -H "Origin: http://localhost:3000" \
+  -H "Access-Control-Request-Method: POST" \
+  -H "Access-Control-Request-Headers: Content-Type" \
+  -v
+```
+
+4. For production, configure `ALLOWED_ORIGINS` in docker-compose.yml:
+```yaml
+backend:
+  environment:
+    - ALLOWED_ORIGINS=https://yourdomain.com
+```
+
+5. Verify API URL doesn't have trailing slash in frontend configuration
 
 ### Monaco Editor Not Loading
 
