@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: wses-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wses
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - wses-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: wses-redis
+    networks:
+      - wses-network
+    expose:
+      - "6379"
+
+  judge0:
+    image: judge0/judge0:1.13.0
+    container_name: wses-judge0
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    expose:
+      - "2358"
+    networks:
+      - wses-network
+    depends_on:
+      - redis
+    privileged: true
+
+  backend:
+    build: ./backend
+    container_name: wses-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_NAME=wses
+      - DB_PORT=3306
+      - JUDGE0_URL=http://judge0:2358
+      - JWT_SECRET=supersecret_change_in_production
+      - PORT=5000
+    depends_on:
+      mysql:
+        condition: service_healthy
+      judge0:
+        condition: service_started
+    networks:
+      - wses-network
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build: ./frontend
+    container_name: wses-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+    depends_on:
+      - backend
+    networks:
+      - wses-network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  mysql_data:
+
+networks:
+  wses-network:
+    driver: bridge
