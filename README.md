@@ -49,10 +49,12 @@ MySQL Database
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Docker
-- Docker Compose
+- Docker (version 20.10+)
+- Docker Compose (version 2.0+)
 
 ### Installation
+
+**No code changes required! Everything is pre-configured and ready to run.**
 
 1. Clone the repository:
 ```bash
@@ -74,6 +76,8 @@ docker compose up --build
 1. The MySQL database will be automatically initialized with sample problems
 2. Create an account by clicking "Sign Up"
 3. Start solving problems!
+
+**Note:** First startup takes 2-3 minutes as Docker downloads images and initializes services. See `SETUP_GUIDE.md` for detailed instructions and troubleshooting.
 
 ## 📊 Database Schema
 

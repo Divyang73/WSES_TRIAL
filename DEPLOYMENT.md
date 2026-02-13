@@ -67,12 +67,23 @@ nginx:
 
 #### 3. Restrict CORS
 
-Edit `backend/src/app.js`:
-```javascript
-app.use(cors({
-  origin: 'https://yourdomain.com',
-  credentials: true
-}));
+The backend CORS configuration supports environment-based origins. By default, it allows:
+- `http://localhost:3000` (frontend)
+- `http://localhost:5000` (backend)
+
+For production, set the `ALLOWED_ORIGINS` environment variable in `docker-compose.yml`:
+
+```yaml
+backend:
+  environment:
+    - ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+```
+
+For a single domain:
+```yaml
+backend:
+  environment:
+    - ALLOWED_ORIGINS=https://yourdomain.com
 ```
 
 ### Performance
@@ -193,6 +204,9 @@ JUDGE0_URL=http://judge0:2358
 
 # Authentication
 JWT_SECRET=your-secret-key-change-in-production
+
+# CORS
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5000
 
 # Server
 PORT=5000

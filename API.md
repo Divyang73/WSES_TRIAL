@@ -383,7 +383,28 @@ Currently not implemented. Consider adding rate limiting for production deployme
 
 ## CORS
 
-CORS is enabled for all origins in development. Configure for production use.
+CORS is configured to allow cross-origin requests from the frontend.
+
+**Default Configuration:**
+- Allowed Origins: `http://localhost:3000`, `http://localhost:5000`
+- Credentials: Enabled
+- Methods: GET, POST, PUT, DELETE, OPTIONS
+- Headers: Content-Type, Authorization
+
+**Environment Configuration:**
+
+Set `ALLOWED_ORIGINS` environment variable to customize allowed origins (comma-separated):
+
+```bash
+ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+```
+
+**Preflight Requests:**
+
+All routes automatically handle OPTIONS preflight requests. The CORS middleware is configured to:
+- Return 200 status for OPTIONS requests
+- Include proper CORS headers in all responses
+- Support credentials for authenticated requests
 
 ---
 
